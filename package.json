@@ -1,0 +1,30 @@
+{
+  "name": "kth-node-configuration",
+  "version": "1.0.0",
+  "description": "Configuration module for Node.js projects",
+  "main": "configurator.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/KTH/kth-node-configuration"
+  },
+  "dependencies": {
+    "lodash": "4.13.1"
+  },
+  "keywords": [
+    "node",
+    "configuration"
+  ],
+  "private": true,
+  "devDependencies": {
+    "dotenv": "2.0.0",
+    "standard": "7.1.0",
+    "tap-spec": "4.1.1",
+    "tape": "4.5.1"
+  },
+  "scripts": {
+    "test": "tape test/**/*Test.js | tap-spec",
+    "codecheck": "standard",
+    "preversion": "npm run codecheck && npm run test",
+    "postversion": "git push && git push --tags"
+  }
+}
