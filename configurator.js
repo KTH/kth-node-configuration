@@ -36,10 +36,6 @@ function _int (key, def) {
   return parseInt(process.env[key], 10) || def
 }
 
-
-
-
-
 module.exports = function (options) {
   options = _.merge({}, defaults, options)
 
@@ -96,11 +92,11 @@ module.exports = function (options) {
 
     secure: function () {
       return this.full().secure
-    },
-
-    getEnv: _env,
-    getEnvString: _str,
-    getEnvBool: _bool,
-    getEnvInt: _int
+    }
   }
 }
+
+module.exports.getEnv = _env
+module.exports.getEnvString = _str
+module.exports.getEnvBool = _bool
+module.exports.getEnvInt = _int
