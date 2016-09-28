@@ -10,6 +10,36 @@ const defaults = {
   local: {}
 }
 
+function _env (key, def) {
+  let type = typeof def
+  if (!process.env[key]) return def
+  switch (type) {
+    case 'boolean':
+      return process.env[key] === 'true'
+    case 'number':
+      return parseInt(process.env[key], 10)
+    default:
+      return process.env[key]
+  }
+}
+
+function _str (key, def) {
+  return process.env[key] || def
+}
+
+function _bool (key, def) {
+  if (process.env[key]) return process.env[key] === 'true'
+  else return def
+}
+
+function _int (key, def) {
+  return parseInt(process.env[key], 10) || def
+}
+
+
+
+
+
 module.exports = function (options) {
   options = _.merge({}, defaults, options)
 
@@ -66,6 +96,11 @@ module.exports = function (options) {
 
     secure: function () {
       return this.full().secure
-    }
+    },
+
+    getEnv: _env,
+    getEnvString: _str,
+    getEnvBool: _bool,
+    getEnvInt: _int
   }
 }
