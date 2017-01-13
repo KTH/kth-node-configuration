@@ -50,3 +50,58 @@ Use the [npm package __dotenv__][dotenv] to set environment variables.
 Take a look at the unit tests for example usage.
 
 [dotenv]: https://www.npmjs.com/package/dotenv
+
+## DEV NOTES ##
+
+- vi fimpar local-/prod-/ref-/devSettings.js
+  - läggs i commonSettings.js, serverSettings.js, browserSettings.js
+
+- fimpa full, safe och secure
+
+När vi skapar nya settings-objektet
+- vi mergear commonSettings.js + serverSettings.js till servern
+- vi mergear commonSettings.js + browserSettings.js till browsern
+  - returneras på endpointen ./browserConfig som javascript
+  TODO: - lägg till script-tag i början av all layout-filer
+    (eller kan vi referera den från JS-filen?)
+
+Migrering:
+
+- Search and replace:
+
+  require('../**/configuration') => require('../**/configuration').server
+
+  config.full => config
+  config.safe => config
+  config.secure: .secure => ''
+  server.full => server
+
+- What are these used for (kth-node-configuration)
+
+  module.exports.getEnv = _env
+  module.exports.getEnvString = _str
+  module.exports.getEnvBool = _bool
+  module.exports.getEnvInt = _int
+
+- Update tests
+
+- Update kth-node-server (to 1.2.0)
+
+  config.full => config
+
+- change how we start server:
+
+    server.setConfig(config) => server.setConfig({ full: config })
+
+- change in adldap.js
+
+  attributes: config.ldapClient.userattrs => attributes: config.ldap.userattrs
+  config.ldapClient.filterReplaceHolder, kthid => config.ldap.filterReplaceHolder, kthid
+
+- Add endpoint .../browserConfig
+- Remove the handlebars helper
+
+  <<globalSettingsForBrowserJS>>
+
+- Add 
+
