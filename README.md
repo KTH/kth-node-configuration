@@ -103,5 +103,10 @@ Migrering:
 
   <<globalSettingsForBrowserJS>>
 
-- Add 
+- remove /buildConfig.js
 
+- remove npm script `"buildConfig"` and also remove call to it from `"postinstall"`-hook
+
+- Change config imports in js-files
+
+	var config = require('config') => var config = { config: window.config, paths: window.paths }
