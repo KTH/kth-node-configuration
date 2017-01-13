@@ -1,14 +1,15 @@
 {
   "name": "kth-node-configuration",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Configuration module for Node.js projects",
-  "main": "configurator.js",
+  "main": "lib/index.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/KTH/kth-node-configuration"
   },
   "dependencies": {
-    "lodash": "4.13.1"
+    "deep-assign": "^2.0.0",
+    "urlgrey": "^0.4.4"
   },
   "keywords": [
     "node",
