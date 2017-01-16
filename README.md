@@ -63,9 +63,10 @@ När vi skapar nya settings-objektet
 - vi mergear commonSettings.js + browserSettings.js till browsern
   - returneras på endpointen ./browserConfig som javascript
   TODO: - lägg till script-tag i början av all layout-filer
-    (eller kan vi referera den från JS-filen?)
 
-Migrering:
+## Migrating from <= 1.0.1
+
+- Update kth-node-server (to 1.2.0)
 
 - Search and replace:
 
@@ -85,20 +86,27 @@ Migrering:
 
 - Update tests
 
-- Update kth-node-server (to 1.2.0)
-
   config.full => config
 
 - change how we start server:
 
+  kth-node-server@1.2.0:
+
     server.setConfig(config) => server.setConfig({ full: config })
 
-- change in adldap.js
+  kth-node-server@2.0.0
+
+    // Check docs for that release
+
+- change in adldap.js (only if we use ldap)
 
   attributes: config.ldapClient.userattrs => attributes: config.ldap.userattrs
   config.ldapClient.filterReplaceHolder, kthid => config.ldap.filterReplaceHolder, kthid
 
+### The following steps only for frontend
+
 - Add endpoint .../browserConfig
+
 - Remove the handlebars helper
 
   <<globalSettingsForBrowserJS>>
@@ -110,3 +118,8 @@ Migrering:
 - Change config imports in js-files
 
 	var config = require('config') => var config = { config: window.config, paths: window.paths }
+
+- include config in head, should look like this
+
+    {{prefixScript '/static/js/vendor.js' 'head-scripts'}}
+    {{prefixScript '/static/browserConfig' 'head-scripts'}}
