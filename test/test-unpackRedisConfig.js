@@ -4,7 +4,7 @@ const expect = require('chai').expect
 const unpackRedisConfig = require('../lib/unpackRedisConfig')
 
 const testURI = 'redis://localhost:6379/'
-const testURIWithSSL = 'redis://localhost:6379/?auth_pass=abcdefghij&ssl=true'
+const testURIWithSSL = 'redis://:4W6ZrQuA6QvDrup2DIryb8hTPIrYGzx0ersukRaT+is=@localhost:6379/?ssl=true'
 
 describe('unpackRedisConfig', function () {
   it('can decode a Redis URI from fallback URI', function () {
@@ -34,7 +34,7 @@ describe('unpackRedisConfig', function () {
 
   it('can handle ssl for Azure', function () {
     const obj = unpackRedisConfig('no-env-exists', testURIWithSSL)
-    expect(obj.auth_pass).to.equal('abcdefghij')
+    expect(obj.auth_pass).to.equal('4W6ZrQuA6QvDrup2DIryb8hTPIrYGzx0ersukRaT+is=')
     expect(obj.tls.servername).to.equal('localhost')
   })
 })
