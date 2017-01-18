@@ -123,3 +123,15 @@ När vi skapar nya settings-objektet
 
     {{prefixScript '/static/js/vendor.js' 'head-scripts'}}
     {{prefixScript '/static/browserConfig' 'head-scripts'}}
+
+## TODO ##
+TODO - add test for decodeUri.js
+TODO - add test for utils.js
+TODO - add test for unpackLDAPConfig.js
+TODO - add test for generateConfig.js
+TODO - add test for getHandler.js
+
+## DONE ##
+DONE - add test for unpackNodeApiConfig.js
+DONE - add test for unpackMongodbConfig.js
+DONE - add test for unpackRedisConfig.js

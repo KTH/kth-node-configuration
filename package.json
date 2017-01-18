@@ -1,6 +1,6 @@
 {
   "name": "kth-node-configuration",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "Configuration module for Node.js projects",
   "main": "lib/index.js",
   "repository": {
@@ -9,8 +9,9 @@
   },
   "dependencies": {
     "deep-assign": "^2.0.0",
-    "urlgrey": "^0.4.4",
-    "safe-utils": "^0.1.1"
+    "qs": "^6.3.0",
+    "safe-utils": "^0.1.1",
+    "url": "^0.4.4"
   },
   "keywords": [
     "node",
@@ -18,13 +19,13 @@
   ],
   "private": true,
   "devDependencies": {
+    "chai": "^3.5.0",
     "dotenv": "2.0.0",
-    "standard": "7.1.0",
-    "tap-spec": "4.1.1",
-    "tape": "4.5.1"
+    "mocha": "^3.2.0",
+    "standard": "7.1.0"
   },
   "scripts": {
-    "test": "tape test/**/*Test.js | tap-spec",
+    "test": "node_modules/mocha/bin/mocha test/**/test-*.js",
     "codecheck": "standard",
     "preversion": "npm run codecheck && npm run test",
     "postversion": "git push && git push --tags"
