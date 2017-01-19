@@ -36,10 +36,15 @@ describe('unpackSMTPConfig', function () {
     expect(obj.protocol).to.equal(undefined)
   })
 
-  it('can handle tsl-connections', function () {
+  it('can handle auth', function () {
     const obj = unpackSMTPConfig('no-env-exists', testURIWithSSL)
     expect(obj.auth.password).to.equal('password')
     expect(obj.auth.username).to.equal('username')
+  })
+
+  it('sets secure on smtps', function () {
+    const obj = unpackSMTPConfig('no-env-exists', testURIWithSSL)
+    expect(obj.secure).to.equal(true)
   })
 
   it('should not accept wrong protocol', function () {
