@@ -5,6 +5,7 @@ const unpackNodeApiConfig = require('../lib/unpackNodeApiConfig')
 
 const testURI = 'http://node-api:3001/api/node'
 const testURIWithSSL = 'https://node-api:3001/api/node'
+const failProtocol = 'mailto://'
 
 describe('unpackNodeApiConfig', function () {
   it('can decode a Mongodb URI from fallback URI', function () {
@@ -42,5 +43,15 @@ describe('unpackNodeApiConfig', function () {
     const obj = unpackNodeApiConfig('no-env-exists', testURIWithSSL)
     expect(obj.port).to.equal(undefined)
     expect(obj.https).to.equal(true)
+  })
+
+  it('should not accept wrong protocol', function () {
+    var theErr
+    try {
+      unpackNodeApiConfig('no-env-exists', failProtocol)
+    } catch (err) {
+      theErr = err
+    }
+    expect(theErr).not.to.equal(undefined)
   })
 })

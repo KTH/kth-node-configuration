@@ -4,6 +4,7 @@ const expect = require('chai').expect
 const unpackMongodbConfig = require('../lib/unpackMongodbConfig')
 
 const testURI = 'mongodb://username@email.com:password@mongohost:27017/innovation?ssl=false'
+const failProtocol = 'http://mongohost:27017/innovation'
 
 describe('unpackMongodbConfig', function () {
   it('can decode a Mongodb URI from fallback URI', function () {
@@ -35,5 +36,15 @@ describe('unpackMongodbConfig', function () {
   it('should not expose protocol property', function () {
     const obj = unpackMongodbConfig('no-env-exists', testURI)
     expect(obj.protocol).to.equal(undefined)
+  })
+
+  it('should not accept wrong protocol', function () {
+    var theErr
+    try {
+      unpackMongodbConfig('no-env-exists', failProtocol)
+    } catch (err) {
+      theErr = err
+    }
+    expect(theErr).not.to.equal(undefined)
   })
 })
