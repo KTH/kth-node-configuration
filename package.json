@@ -1,6 +1,6 @@
 {
   "name": "kth-node-configuration",
-  "version": "1.3.0",
+  "version": "1.3.1",
   "description": "Configuration module for Node.js projects",
   "main": "lib/index.js",
   "repository": {

@@ -38,8 +38,8 @@ describe('unpackSMTPConfig', function () {
 
   it('can handle auth', function () {
     const obj = unpackSMTPConfig('no-env-exists', testURIWithSSL)
-    expect(obj.auth.password).to.equal('password')
-    expect(obj.auth.username).to.equal('username')
+    expect(obj.auth.pass).to.equal('password')
+    expect(obj.auth.user).to.equal('username')
   })
 
   it('sets secure on smtps', function () {
