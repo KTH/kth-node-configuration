@@ -117,7 +117,9 @@ server.start({
   attributes: config.ldapClient.userattrs => attributes: config.ldap.userattrs
   config.ldapClient.filterReplaceHolder, kthid => config.ldap.filterReplaceHolder, kthid
 
-- change configuration.js
+- change configuration.js (examples for node-web and node-api apps)
+
+*NODE-WEB:*
 
 ```javascript
 'use strict'
@@ -142,7 +144,20 @@ const browserConfig = generateConfig([
 
 module.exports.browser = browserConfig
 ```
-NOTE: Browser settings are only needed in node-web (frontend) projects
+
+*NODE-API:*
+
+```javascript
+'use strict'
+const { generateConfig } = require('kth-node-configuration')
+
+// These settings are used by the server
+const serverConfig = generateConfig([
+  require('../../../config/serverSettings')
+])
+
+module.exports.server = serverConfig
+```
 
 - add dependency to dotenv and have it load your .env-file on startup. server.js should start like this:
 
