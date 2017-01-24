@@ -66,8 +66,6 @@ När vi skapar nya settings-objektet
 
 ## Migrating from <= 1.0.1
 
-- Update kth-node-server (to 1.2.0)
-
 - Search and replace:
 
   require('../**/configuration') => require('../**/configuration').server
@@ -90,11 +88,11 @@ När vi skapar nya settings-objektet
 
 - change how we start server:
 
-  kth-node-server@1.2.0:
+  kth-node-server@1.x:
 
     server.setConfig(config) => server.setConfig({ full: config })
 
-  kth-node-server@2.0.0
+  kth-node-server@3.x
 
     // Check docs for that release
 
