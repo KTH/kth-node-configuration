@@ -66,6 +66,12 @@ När vi skapar nya settings-objektet
 
 ## Migrating from <= 1.0.1
 
+- convert ...Settings.js files to:
+
+  - commonSettings.js -- shared by browser and server
+  - serverSettings.js -- server specific settings that should NEVER be sent to a browser
+  - browserSettings.js -- browser specific settings that are passed to browser
+
 - Search and replace:
 
   require('../**/configuration') => require('../**/configuration').server
@@ -101,13 +107,79 @@ När vi skapar nya settings-objektet
   attributes: config.ldapClient.userattrs => attributes: config.ldap.userattrs
   config.ldapClient.filterReplaceHolder, kthid => config.ldap.filterReplaceHolder, kthid
 
+- change configuration.js
+
+```javascript
+'use strict'
+const { generateConfig } = require('kth-node-configuration')
+// The ldapDefaultSettings contains ldapClient defaults object
+const ldapDefaultSettings = require('kth-node-configuration').unpackLDAPConfig.defaultSettings
+
+// These settings are used by the server
+const serverConfig = generateConfig([
+  ldapDefaultSettings,
+  require('../../../config/commonSettings'),
+  require('../../../config/serverSettings')
+])
+
+module.exports.server = serverConfig
+
+// These settings are passed to the browser
+const browserConfig = generateConfig([
+  require('../../../config/commonSettings'),
+  require('../../../config/browserSettings')
+])
+
+module.exports.browser = browserConfig
+```
+NOTE: Browser settings are only needed in node-web (frontend) projects
+
+- add dependency to dotenv and have it load your .env-file on startup. server.js should start like this:
+
+```javascript
+const server = require('kth-node-server')
+// Load .env file in development mode
+const nodeEnv = process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase()
+if (nodeEnv === 'development' || nodeEnv === 'dev' || !nodeEnv) {
+  require('dotenv').config()
+}
+// Now read the server config
+const config = require('./init/configuration').server
+```
+
+- make sure configuration/index.js has the following export:
+
+```javascript
+module.exports = require('./configuration')
+```
+
 ### The following steps only for frontend
 
-- Add endpoint .../browserConfig
+- Add endpoint .../browserConfig to staticFiles.js (earlier name: routing.js)
 
-- Remove the handlebars helper
+```javascript
+const paths = require('../routing/paths')
+const browserConfig = require('../configuration').browser
+const browserConfigHandler = require('kth-node-configuration').getHandler(browserConfig, paths)
 
+...
+
+// Expose browser configurations
+server.use(config.proxyPrefixPath.uri + '/static/browserConfig', browserConfigHandler)
+```
+
+- add a line of code to load handlebars-helpers in server.js
+
+```javascript
+// Register handlebar helpers
+require('./views/helpers')
+```
+
+- Remove the handlebars helper if you have one
+
+```hbs
   <<globalSettingsForBrowserJS>>
+```
 
 - remove /buildConfig.js
 
@@ -119,8 +191,10 @@ När vi skapar nya settings-objektet
 
 - include config in head, should look like this
 
-    {{prefixScript '/static/js/vendor.js' 'head-scripts'}}
-    {{prefixScript '/static/browserConfig' 'head-scripts'}}
+```hbs
+{{prefixScript '/static/js/vendor.js' 'head-scripts'}}
+{{prefixScript '/static/browserConfig' 'head-scripts'}}
+```
 
 ## TODO ##
 TODO - add test for decodeUri.js
