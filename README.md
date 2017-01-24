@@ -98,9 +98,19 @@ När vi skapar nya settings-objektet
 
     server.setConfig(config) => server.setConfig({ full: config })
 
-  kth-node-server@3.x
+  kth-node-server@3.x:
 
-    // Check docs for that release
+```javascript
+server.start({
+  pfx: config.ssl.pfx,
+  passphrase: config.ssl.passphrase,
+  key: config.ssl.key,
+  ca: config.ssl.ca,
+  cert: config.ssl.cert,
+  port: config.port,
+  log
+})
+```
 
 - change in adldap.js (only if we use ldap)
 
