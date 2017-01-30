@@ -4,7 +4,6 @@ Configuration module for Node.js projects.
 
 ## Usage
 
-
 ### node-api projects
 In node-api projects you only have a single settings file called serverSettings.js. Create your configuration by adding the following code:
 
@@ -115,6 +114,24 @@ Use the [npm package __dotenv__][dotenv] to set environment variables during dev
 Take a look at the unit tests for example usage.
 
 [dotenv]: https://www.npmjs.com/package/dotenv
+
+This code snippet loads env-vars with dotenv during development. In production it checks
+for the availability of SERVICE_PUBLISH which is always set in a KTH Docker environment.
+If it isn't found it will require localSettings.js which is the standard settings file
+in the KTH Ansible environment. There you can set env-vars by `process.env.ENV_VAR = 'value'`
+
+```javascript
+// Load .env file in development mode
+const nodeEnv = process.env.NODE_ENV && process.env.NODE_ENV.toLowerCase()
+if (nodeEnv === 'development' || nodeEnv === 'dev' || !nodeEnv) {
+  require('dotenv').config()
+} else if (!process.env.SERVICE_PUBLISH) {
+  // This is an ANSIBLE machine which doesn't set env-vars atm
+  // so read localSettings.js which we now use to fake env-vars
+  // because it already exists in our Ansible setup.
+  require('../config/localSettings')
+}
+```
 
 ## DEV NOTES ##
 
