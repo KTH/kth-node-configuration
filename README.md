@@ -4,49 +4,114 @@ Configuration module for Node.js projects.
 
 ## Usage
 
+
+### node-api projects
+In node-api projects you only have a single settings file called serverSettings.js. Create your configuration by adding the following code:
+
 ```javascript
-const configurator = require('kth-node-configuration')
+'use strict'
+const { generateConfig } = require('kth-node-configuration')
 
-const config = configurator({
-  defaults: require('./config/defaults'),
-  dev: require('./config/dev'),
-  prod: require('./config/prod'),
-  ref: require('./config/ref'),
-  local: require('./config/local')
-})
+// These settings are used by the server
+const serverConfig = generateConfig([
+  require('../../../config/serverSettings')
+])
 
-module.exports = {
-  full: config.full(),
-  secure: config.secure(),
-  safe: config.safe(),
-  env: config.env()
-}
+module.exports.server = serverConfig
 ```
 
-## Options
+All options are available in this object.
 
-- `defaults` should contain settings that will apply if no other config
-  file has it set. It's recommended that this file contains a "skeleton"
-  for the secure settings to document what the local settings can set.
-- `dev`, `ref`, and `prod` should contain environment specific settings.
-  They will override the defaults. The configurator selects this file
-  depending on the `process.env.NODE_ENV` variable.
-- `local` should contain settings that either shouldn't be checked into
-  source control or local overrides specific to the machine running the
-  app.   
+### node-web projects
 
-## API
+In node-web projects your settings are split in three files:
 
-- `full()` returns the fully merged configuration.
-- `secure()` returns only the secure merged configuration.
-- `safe()` returns the fully merged configuration with the secure
-  section blanked out. This should be safe to use on the client-side.
-- `env()` returns the current enviroment setting. Will be one of the
-  following: `dev`, `ref`, or `prod`.
+- commonSettings.js -- settings shared by browser and server (i.e. don't store any secrets here)
+- browserSettings.js -- settings passed to the browser (i.e. don't store any secrets here either)
+- serverSettings.js -- settings that are specific to the server
 
-## Pro-tip!
+If you use LDAP you will also want to add default LDAP settings to your server config.
 
-Use the [npm package __dotenv__][dotenv] to set environment variables.
+```javascript
+'use strict'
+const { generateConfig } = require('kth-node-configuration')
+// The ldapDefaultSettings contains ldapClient defaults object
+const ldapDefaultSettings = require('kth-node-configuration').unpackLDAPConfig.defaultSettings
+
+// These settings are used by the server
+const serverConfig = generateConfig([
+  ldapDefaultSettings,
+  require('../../../config/commonSettings'),
+  require('../../../config/serverSettings')
+])
+
+module.exports.server = serverConfig
+
+// These settings are passed to the browser
+const browserConfig = generateConfig([
+  require('../../../config/commonSettings'),
+  require('../../../config/browserSettings')
+])
+
+module.exports.browser = browserConfig
+```
+
+### Helper methods
+
+There are a couple of helper methods available to allow your settings files to be a bit more concise.
+
+The env-vars should be on the same form as the default URI.
+
+Options override any settings you pass through env-vars or defaults.
+
+NOTE: the helper methods obey standard URI syntax. Any get params you add will be set as properties
+on the config object.
+
+#### unpackKOPPSConfig(ENV_VAR_NAME_URI, defaultURI [, options])
+```javascript
+const defaultUri = 'http://[hostname][:port][/path]?defaultTimeout=60000'
+unpackKOPPSConfig('KOPPS_URI', defaultUri)
+```
+
+#### unpackLDAPConfig(ENV_VAR_NAME_URI, ENV_VAR_NAME_PASSWORD, defaultURI [, options])
+```javascript
+// Never hard code defaults to LDAP in settings, always pass through env-vars
+// LDAP_URI = 'ldaps://[username]@[hostname]:[port]
+// LDAP_PASSWORD = 'yadayada'
+unpackKOPPSConfig('LDAP_URI', 'LDAP_PASSWORD')
+```
+
+#### unpackMongodbConfig(ENV_VAR_NAME_URI, defaultURI [, options])
+```javascript
+const defaultUri = 'mongodb://[hostname][:port][/path][?ssl=true]'
+unpackMongodbConfig('MONGODB_URI', defaultUri)
+```
+
+#### unpackNodeApiConfig(ENV_VAR_NAME_URI, defaultURI [, options])
+```javascript
+const defaultUri = 'http[s]://[hostname][:port][/path][?required=true&defaultTimeout=10000]'
+unpackNodeApiConfig('NODE_API_URI', defaultUri)
+```
+
+#### unpackRedisConfig(ENV_VAR_NAME_URI, defaultURI [, options])
+```javascript
+const defaultUri = 'redis://[hostname][:port]/'
+unpackRedisConfig('REDIS_URI', defaultUri)
+```
+
+#### unpackSMTPConfig(ENV_VAR_NAME_URI, defaultURI [, options])
+```javascript
+// Never include username or password in default SMTP-config
+const defaultUri = 'smtp://smtp.kth.se:25'
+// SMTP_URI = smtp[s]://[username][:password]@[hostname]:[port]
+unpackSMTPConfig('SMTP_URI', defaultUri)
+```
+
+Examples of usage can be found int the node-api and node-web template projects.
+
+## Dotenv
+
+Use the [npm package __dotenv__][dotenv] to set environment variables during development.
 Take a look at the unit tests for example usage.
 
 [dotenv]: https://www.npmjs.com/package/dotenv
