@@ -170,6 +170,7 @@ När vi skapar nya settings-objektet
   module.exports.getEnvString = _str
   module.exports.getEnvBool = _bool
   module.exports.getEnvInt = _int
+  module.exports.devDefaults = _str
 
 - Update tests
 
