@@ -1,4 +1,5 @@
 # kth-node-configuration
+[![Build Status](https://travis-ci.org/KTH/kth-node-configuration.svg?branch=master)](https://travis-ci.org/KTH/kth-node-configuration)
 
 Configuration module for Node.js projects.
 
