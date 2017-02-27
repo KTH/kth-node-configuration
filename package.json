@@ -17,7 +17,6 @@
     "node",
     "configuration"
   ],
-  "private": true,
   "devDependencies": {
     "chai": "^3.5.0",
     "dotenv": "2.0.0",
