@@ -27,6 +27,7 @@
   "scripts": {
     "test": "node_modules/mocha/bin/mocha test/**/test-*.js",
     "codecheck": "standard",
+    "codefix": "standard --fix",
     "preversion": "npm run codecheck && npm run test",
     "postversion": "git push && git push --tags"
   }
