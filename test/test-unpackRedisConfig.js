@@ -6,6 +6,7 @@ const unpackRedisConfig = require('../lib/unpackRedisConfig')
 const testURI = 'redis://localhost:6379/'
 const testURIWithSSL = 'redis://:4W6ZrQuA6QvDrup2DIryb8hTPIrYGzx0ersukRaT+is=@localhost:6379/?ssl=true'
 const failProtocol = 'wrong://'
+const badUri = 'redis://'
 
 describe('unpackRedisConfig', function () {
   it('can decode a Redis URI from fallback URI', function () {
@@ -43,6 +44,16 @@ describe('unpackRedisConfig', function () {
     var theErr
     try {
       unpackRedisConfig('no-env-exists', failProtocol)
+    } catch (err) {
+      theErr = err
+    }
+    expect(theErr).not.to.equal(undefined)
+  })
+
+  it('should not accept undefined hostname', function () {
+    var theErr
+    try {
+      unpackRedisConfig('no-env-exists', badUri)
     } catch (err) {
       theErr = err
     }
