@@ -157,20 +157,22 @@ När vi skapar nya settings-objektet
 
 - Search and replace:
 
+```
   require('../**/configuration') => require('../**/configuration').server
+```
 
-  config.full => config
-  config.safe => config
-  config.secure: .secure => ''
-  server.full => server
+  - config.full => config
+  - config.safe => config
+  - [xxx].secure => [xxx]
+  - server.full => server
 
 - What are these used for (kth-node-configuration)
 
-  module.exports.getEnv = _env
-  module.exports.getEnvString = _str
-  module.exports.getEnvBool = _bool
-  module.exports.getEnvInt = _int
-  module.exports.devDefaults = _str
+  - module.exports.getEnv = _env
+  - module.exports.getEnvString = _str
+  - module.exports.getEnvBool = _bool
+  - module.exports.getEnvInt = _int
+  - module.exports.devDefaults = _str
 
 - Update tests
 
@@ -198,8 +200,8 @@ server.start({
 
 - change in adldap.js (only if we use ldap)
 
-  attributes: config.ldapClient.userattrs => attributes: config.ldap.userattrs
-  config.ldapClient.filterReplaceHolder, kthid => config.ldap.filterReplaceHolder, kthid
+  - attributes: config.ldapClient.userattrs => attributes: config.ldap.userattrs
+  - config.ldapClient.filterReplaceHolder, kthid => config.ldap.filterReplaceHolder, kthid
 
 - change configuration.js (examples for node-web and node-api apps)
 
