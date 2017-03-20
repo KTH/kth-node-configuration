@@ -205,6 +205,17 @@ server.start({
 
 - change configuration.js (examples for node-web and node-api apps)
 
+
+*app.js*
+Edit app.js to look like this:
+
+```javascript
+'use strict'
+
+const server = require('./server/server')
+require('./server/init')
+```
+
 *NODE-WEB:*
 
 ```javascript
