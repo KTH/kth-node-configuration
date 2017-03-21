@@ -225,12 +225,9 @@ require('./server/init')
 ```javascript
 'use strict'
 const { generateConfig } = require('kth-node-configuration')
-// The ldapDefaultSettings contains ldapClient defaults object
-const ldapDefaultSettings = require('kth-node-configuration').unpackLDAPConfig.defaultSettings
 
 // These settings are used by the server
 const serverConfig = generateConfig([
-  ldapDefaultSettings,
   require('../../../config/commonSettings'),
   require('../../../config/serverSettings')
 ])
@@ -245,6 +242,12 @@ const browserConfig = generateConfig([
 
 module.exports.browser = browserConfig
 ```
+
+In adldap.js you need to change:
+
+  - config.ldapClient => config.ldap
+
+And move any config settings from ldapClient object to ldap object.
 
 *NODE-API:*
 
