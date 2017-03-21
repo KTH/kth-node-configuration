@@ -78,8 +78,12 @@ unpackKOPPSConfig('KOPPS_URI', defaultUri)
 // Never hard code defaults to LDAP in settings, always pass through env-vars
 // LDAP_URI = 'ldaps://[username]@[hostname]:[port]
 // LDAP_PASSWORD = 'yadayada'
-unpackKOPPSConfig('LDAP_URI', 'LDAP_PASSWORD')
+unpackLDAPConfig('LDAP_URI', 'LDAP_PASSWORD')
 ```
+
+NOTE 1: Some default settings are always applied and can be overridden by passing options. Check source for defaults.
+
+NOTE 2: Having a separate config.ldap and config.ldapClient configuration is deprecated, everything should be in config.ldap.
 
 #### unpackMongodbConfig(ENV_VAR_NAME_URI, defaultURI [, options])
 ```javascript
@@ -320,12 +324,18 @@ require('./views/helpers')
 
 ## TODO ##
 TODO - add test for decodeUri.js
+
 TODO - add test for utils.js
+
 TODO - add test for unpackLDAPConfig.js
+
 TODO - add test for generateConfig.js
+
 TODO - add test for getHandler.js
 
 ## DONE ##
 DONE - add test for unpackNodeApiConfig.js
+
 DONE - add test for unpackMongodbConfig.js
+
 DONE - add test for unpackRedisConfig.js
