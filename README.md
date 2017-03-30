@@ -67,6 +67,16 @@ Options override any settings you pass through env-vars or defaults.
 NOTE: the helper methods obey standard URI syntax. Any get params you add will be set as properties
 on the config object.
 
+#### unpackApiKeysConfig(ENV_VAR_NAME_URI, defaultURI)
+
+This call returns an array of api access key objects.
+
+```javascript
+// Multiple entries separated by single space
+const defaultUri = '?name=devClient&apiKey=1234&scope=write&scope=read'
+unpackApiKeysConfig('API_KEYS', defaultUri)
+```
+
 #### unpackKOPPSConfig(ENV_VAR_NAME_URI, defaultURI [, options])
 ```javascript
 const defaultUri = 'http://[hostname][:port][/path]?defaultTimeout=60000'
