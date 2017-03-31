@@ -24,7 +24,7 @@ describe('unpackApiKeysConfig', function () {
     process.env['API_KEY[1]'] = uriTwo
 
     const obj = unpackApiKeysConfig('API_KEY', undefined)
-    
+
     expect(obj[0].name).to.equal('devClient')
     expect(obj[0].apiKey).to.equal('1234')
     expect(obj[0].scope[0]).to.equal('write')
