@@ -79,9 +79,9 @@ unpackApiKeysConfig('API_KEYS', defaultUri)
 To define multiple API_KEYS you name each key as if it was a reference to an array. The unpacker will iterate from 0 and
 add each item until it comes across a value that is undefined:
 ```
-API_KEYS[0] = '?name=devClient&apiKey=1234&scope=write&scope=read'
-API_KEYS[1] = '?name=devClient&apiKey=1234&scope=write&scope=read'
-API_KEYS[2] = '?name=devClient&apiKey=1234&scope=write&scope=read'
+API_KEYS_0 = '?name=devClient&apiKey=1234&scope=write&scope=read'
+API_KEYS_1 = '?name=devClient&apiKey=1234&scope=write&scope=read'
+API_KEYS_2 = '?name=devClient&apiKey=1234&scope=write&scope=read'
 ```
 
 #### unpackKOPPSConfig(ENV_VAR_NAME_URI, defaultURI [, options])

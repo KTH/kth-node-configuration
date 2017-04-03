@@ -20,8 +20,8 @@ describe('unpackApiKeysConfig', function () {
   })
 
   it('can decode two API key', function () {
-    process.env['API_KEY[0]'] = uriOne
-    process.env['API_KEY[1]'] = uriTwo
+    process.env['API_KEY_0'] = uriOne
+    process.env['API_KEY_1'] = uriTwo
 
     const obj = unpackApiKeysConfig('API_KEY', undefined)
 
@@ -33,8 +33,8 @@ describe('unpackApiKeysConfig', function () {
     expect(obj[1].apiKey).to.equal('5678')
     expect(obj[1].scope[0]).to.equal('read')
 
-    process.env['API_KEY[0]'] = undefined
-    process.env['API_KEY[1]'] = undefined
+    process.env['API_KEY_0'] = undefined
+    process.env['API_KEY_1'] = undefined
   })
 
   it('can fall back to default', function () {
