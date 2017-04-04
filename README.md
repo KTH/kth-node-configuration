@@ -215,7 +215,7 @@ server.start({
   ca: config.ssl.ca,
   cert: config.ssl.cert,
   port: config.port,
-  log
+  logger: log // Your logging service, could be console or kth-node-log
 })
 ```
 
