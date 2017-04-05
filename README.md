@@ -67,6 +67,8 @@ Options override any settings you pass through env-vars or defaults.
 NOTE: the helper methods obey standard URI syntax. Any get params you add will be set as properties
 on the config object.
 
+NOTE 2: Don't forget to escape special characters such as any ampersand (&) in keys to '%26'
+
 #### unpackApiKeysConfig(ENV_VAR_NAME_URI, defaultURI)
 
 This call returns an array of api access key objects.
