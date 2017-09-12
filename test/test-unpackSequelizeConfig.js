@@ -22,14 +22,14 @@ describe('unpackSequelizeConfig', function () {
 
   it('can override pool config', function () {
     process.env['TEST_ENV_NOW_HERE'] = testURI
-    const obj = unpackSequelizeConfig('TEST_ENV_NOW_HERE', undefined, { pool : { max: 1}})
+    const obj = unpackSequelizeConfig('TEST_ENV_NOW_HERE', undefined, {pool: {max: 1}})
     expect(obj.pool.max).to.equal(1)
   })
 
   it('should not accept wrong protocol', function () {
     var theErr
     try {
-      unpackMongodbConfig('no-env-exists', failProtocol)
+      unpackSequelizeConfig('no-env-exists', failProtocol)
     } catch (err) {
       theErr = err
     }
