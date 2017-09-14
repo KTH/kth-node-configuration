@@ -139,9 +139,9 @@ unpackSMTPConfig('SMTP_URI', defaultUri)
 // Never include username or password in default SMTP-config
 const defaultSQLiteUri = 'sqlite://path/to/db.file'
 // DB_URI = sqlite://[path/to/file]
-const defaultSQLServerUri = 'mssql://username:password@db.test.com/InstanceName/DbName'
+const defaultSQLServerUri = 'mssql://username@db.test.com/InstanceName/DbName'
 // DB_URI = mssql://[username][:password]@[hostname]:[port]/[DbInstance]/[DbName]
-unpackSequelizeConfig('DB_URI', defaultUri)
+unpackSequelizeConfig('DB_URI', 'DB_PWD', defaultUri)
 ```
 
 Examples of usage can be found int the node-api and node-web template projects.

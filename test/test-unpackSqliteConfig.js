@@ -10,7 +10,7 @@ const correctPathToFile = '/' + testPathToFile
 
 describe('unpackSqliteConfig', function () {
   it('can decode a SQLite config from fallback URI', function () {
-    const obj = unpackSequelizeConfig('no-env-exists', testURI)
+    const obj = unpackSequelizeConfig('no-env-exists', undefined, testURI)
     expect(obj.dialect).to.equal('sqlite')
     expect(obj.storage).to.equal(correctPathToFile)
   })
@@ -23,14 +23,14 @@ describe('unpackSqliteConfig', function () {
   })
 
   it('should not expose protocol property', function () {
-    const obj = unpackSequelizeConfig('no-env-exists', testURI)
+    const obj = unpackSequelizeConfig('no-env-exists', undefined, testURI)
     expect(obj.protocol).to.equal(undefined)
   })
 
   it('should not accept wrong protocol', function () {
     var theErr
     try {
-      unpackSequelizeConfig('no-env-exists', failProtocol)
+      unpackSequelizeConfig('no-env-exists', undefined, failProtocol)
     } catch (err) {
       theErr = err
     }
