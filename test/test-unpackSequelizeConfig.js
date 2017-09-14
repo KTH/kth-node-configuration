@@ -32,8 +32,6 @@ describe('unpackSequelizeConfig', function () {
     expect(obj.password).to.equal('mypassword')
   })
 
-
-
   it('should not accept wrong protocol', function () {
     var theErr
     try {

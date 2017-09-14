@@ -23,7 +23,7 @@ describe('unpackSQLServerConfig', function () {
     expect(obj.host).to.equal('db.test.com')
     expect(obj.port).to.equal(1234)
   })
-  
+
   it('should not expose protocol property', function () {
     const obj = unpackSequelizeConfig('no-env-exists', undefined, testDbURI)
     expect(obj.protocol).to.equal(undefined)
