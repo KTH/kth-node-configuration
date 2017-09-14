@@ -134,6 +134,16 @@ const defaultUri = 'smtp://smtp.kth.se:25'
 unpackSMTPConfig('SMTP_URI', defaultUri)
 ```
 
+#### unpackSequelizeConfig(ENV_VAR_NAME_URI, defaultURI [, options])
+```javascript
+// Never include username or password in default SMTP-config
+const defaultSQLiteUri = 'sqlite://path/to/db.file'
+// DB_URI = sqlite://[path/to/file]
+const defaultSQLServerUri = 'mssql://username:password@db.test.com/InstanceName/DbName'
+// DB_URI = mssql://[username][:password]@[hostname]:[port]/[DbInstance]/[DbName]
+unpackSequelizeConfig('DB_URI', defaultUri)
+```
+
 Examples of usage can be found int the node-api and node-web template projects.
 
 ## Dotenv

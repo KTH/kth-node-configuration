@@ -4,12 +4,12 @@ const expect = require('chai').expect
 const unpackSequelizeConfig = require('../lib/unpackSequelizeConfig')
 
 const testPathToFile = 'path/to/my/db/database.sqlite'
-const testURI = 'file://' + testPathToFile
+const testURI = 'sqlite://' + testPathToFile
 const failProtocol = 'http://path/to/my/db/database.sqlite'
 const correctPathToFile = '/' + testPathToFile
 
 describe('unpackSqliteConfig', function () {
-  it('can decode a Sqlite config from fallback URI', function () {
+  it('can decode a SQLite config from fallback URI', function () {
     const obj = unpackSequelizeConfig('no-env-exists', testURI)
     expect(obj.dialect).to.equal('sqlite')
     expect(obj.storage).to.equal(correctPathToFile)

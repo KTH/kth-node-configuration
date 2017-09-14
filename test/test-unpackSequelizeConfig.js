@@ -3,7 +3,7 @@
 const expect = require('chai').expect
 const unpackSequelizeConfig = require('../lib/unpackSequelizeConfig')
 
-const testURI = 'file://path/to/my/db/database.sqlite'
+const testURI = 'sqlite://path/to/my/db/database.sqlite'
 const failProtocol = 'smurf://path/to/my/db/database.sqlite'
 
 describe('unpackSequelizeConfig', function () {
