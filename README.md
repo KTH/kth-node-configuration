@@ -108,6 +108,8 @@ NOTE 1: Some default settings are always applied and can be overridden by passin
 
 NOTE 2: Having a separate config.ldap and config.ldapClient configuration is deprecated, everything should be in config.ldap.
 
+NOTE 3: upackRedisConfig supports Azure connection string
+
 #### unpackMongodbConfig(ENV_VAR_NAME_URI, defaultURI [, options])
 ```javascript
 const defaultUri = 'mongodb://[hostname][:port][/path][?ssl=true]'
