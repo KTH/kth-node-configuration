@@ -1,5 +1,7 @@
 /* eslint-env mocha */
+
 'use strict'
+
 const expect = require('chai').expect
 const unpackSequelizeConfig = require('../lib/unpackSequelizeConfig')
 
@@ -7,15 +9,15 @@ const testInstanceURI = 'mssql://username:password@db.test.com/InstanceName/DbNa
 const testDbURI = 'mssql://username:password@db.test.com:1234/DbName'
 const failProtocol = 'http://path/to/my/db/database.crap'
 
-describe('unpackSQLServerConfig', function () {
-  it('can decode a SQLServer config from fallback URI', function () {
+describe('unpackSQLServerConfig', () => {
+  it('can decode a SQLServer config from fallback URI', () => {
     const obj = unpackSequelizeConfig('no-env-exists', undefined, testInstanceURI)
     expect(obj.dialect).to.equal('mssql')
     expect(obj.dbName).to.equal('DbName')
   })
 
-  it('can decode a SQLServer config from env var', function () {
-    process.env['TEST_ENV_NOW_HERE'] = testDbURI
+  it('can decode a SQLServer config from env var', () => {
+    process.env.TEST_ENV_NOW_HERE = testDbURI
     const obj = unpackSequelizeConfig('TEST_ENV_NOW_HERE')
     expect(obj.dialect).to.equal('mssql')
     expect(obj.dbName).to.equal('DbName')
@@ -24,13 +26,13 @@ describe('unpackSQLServerConfig', function () {
     expect(obj.port).to.equal(1234)
   })
 
-  it('should not expose protocol property', function () {
+  it('should not expose protocol property', () => {
     const obj = unpackSequelizeConfig('no-env-exists', undefined, testDbURI)
     expect(obj.protocol).to.equal(undefined)
   })
 
-  it('should not accept wrong protocol', function () {
-    var theErr
+  it('should not accept wrong protocol', () => {
+    let theErr
     try {
       unpackSequelizeConfig('no-env-exists', undefined, failProtocol)
     } catch (err) {

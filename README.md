@@ -1,11 +1,11 @@
-# kth-node-configuration
-[![Build Status](https://travis-ci.org/KTH/kth-node-configuration.svg?branch=master)](https://travis-ci.org/KTH/kth-node-configuration)
+# kth-node-configuration [![Build Status](https://travis-ci.org/KTH/kth-node-configuration.svg?branch=master)](https://travis-ci.org/KTH/kth-node-configuration)
 
 Configuration module for Node.js projects.
 
 ## Usage
 
 ### node-api projects
+
 In node-api projects you only have a single settings file called serverSettings.js. Create your configuration by adding the following code:
 
 ```javascript
@@ -13,9 +13,7 @@ In node-api projects you only have a single settings file called serverSettings.
 const { generateConfig } = require('kth-node-configuration')
 
 // These settings are used by the server
-const serverConfig = generateConfig([
-  require('../../../config/serverSettings')
-])
+const serverConfig = generateConfig([require('../../../config/serverSettings')])
 
 module.exports.server = serverConfig
 ```
@@ -68,6 +66,7 @@ NOTE: the helper methods obey standard URI syntax. Any get params you add will b
 on the config object.
 
 #### Escaping
+
 Don't forget to escape special characters such as:
 
 - '&' in keys to '%26'
@@ -84,6 +83,7 @@ unpackApiKeysConfig('API_KEYS', defaultUri)
 
 To define multiple API_KEYS you name each key as if it was a reference to an array. The unpacker will iterate from 0 and
 add each item until it comes across a value that is undefined:
+
 ```
 API_KEYS_0 = '?name=devClient&apiKey=1234&scope=write&scope=read'
 API_KEYS_1 = '?name=devClient&apiKey=1234&scope=write&scope=read'
@@ -91,12 +91,14 @@ API_KEYS_2 = '?name=devClient&apiKey=1234&scope=write&scope=read'
 ```
 
 #### unpackKOPPSConfig(ENV_VAR_NAME_URI, defaultURI [, options])
+
 ```javascript
 const defaultUri = 'http://[hostname][:port][/path]?defaultTimeout=60000'
 unpackKOPPSConfig('KOPPS_URI', defaultUri)
 ```
 
 #### unpackLDAPConfig(ENV_VAR_NAME_URI, ENV_VAR_NAME_PASSWORD, defaultURI [, options])
+
 ```javascript
 // Never hard code defaults to LDAP in settings, always pass through env-vars
 // LDAP_URI = 'ldaps://[username]@[hostname]:[port]
@@ -111,24 +113,28 @@ NOTE 2: Having a separate config.ldap and config.ldapClient configuration is dep
 NOTE 3: upackRedisConfig supports Azure connection string
 
 #### unpackMongodbConfig(ENV_VAR_NAME_URI, defaultURI [, options])
+
 ```javascript
 const defaultUri = 'mongodb://[hostname][:port][/path][?ssl=true]'
 unpackMongodbConfig('MONGODB_URI', defaultUri)
 ```
 
 #### unpackNodeApiConfig(ENV_VAR_NAME_URI, defaultURI [, options])
+
 ```javascript
 const defaultUri = 'http[s]://[hostname][:port][/path][?required=true&defaultTimeout=10000]'
 unpackNodeApiConfig('NODE_API_URI', defaultUri)
 ```
 
 #### unpackRedisConfig(ENV_VAR_NAME_URI, defaultURI [, options])
+
 ```javascript
 const defaultUri = 'redis://[hostname][:port]/'
 unpackRedisConfig('REDIS_URI', defaultUri)
 ```
 
 #### unpackSMTPConfig(ENV_VAR_NAME_URI, defaultURI [, options])
+
 ```javascript
 // Never include username or password in default SMTP-config
 const defaultUri = 'smtp://smtp.kth.se:25'
@@ -137,6 +143,7 @@ unpackSMTPConfig('SMTP_URI', defaultUri)
 ```
 
 #### unpackSequelizeConfig(ENV_VAR_NAME_URI, defaultURI [, options])
+
 ```javascript
 // Never include username or password in default SMTP-config
 const defaultSQLiteUri = 'sqlite://path/to/db.file'
@@ -150,7 +157,7 @@ Examples of usage can be found int the node-api and node-web template projects.
 
 ## Dotenv
 
-Use the [npm package __dotenv__][dotenv] to set environment variables during development.
+Use the [npm package **dotenv**][dotenv] to set environment variables during development.
 Take a look at the unit tests for example usage.
 
 [dotenv]: https://www.npmjs.com/package/dotenv
@@ -173,18 +180,20 @@ if (nodeEnv === 'development' || nodeEnv === 'dev' || !nodeEnv) {
 }
 ```
 
-## DEV NOTES ##
+## DEV NOTES
 
 - vi fimpar local-/prod-/ref-/devSettings.js
+
   - läggs i commonSettings.js, serverSettings.js, browserSettings.js
 
 - fimpa full, safe och secure
 
 När vi skapar nya settings-objektet
+
 - vi mergear commonSettings.js + serverSettings.js till servern
 - vi mergear commonSettings.js + browserSettings.js till browsern
   - returneras på endpointen ./browserConfig som javascript
-  TODO: - lägg till script-tag i början av all layout-filer
+    TODO: - lägg till script-tag i början av all layout-filer
 
 ## Migrating from <= 1.0.1
 
@@ -200,18 +209,18 @@ När vi skapar nya settings-objektet
   require('../**/configuration') => require('../**/configuration').server
 ```
 
-  - config.full => config
-  - config.safe => config
-  - [xxx].secure => [xxx]
-  - server.full => server
+- config.full => config
+- config.safe => config
+- [xxx].secure => [xxx]
+- server.full => server
 
 - What are these used for (kth-node-configuration)
 
-  - module.exports.getEnv = _env
-  - module.exports.getEnvString = _str
-  - module.exports.getEnvBool = _bool
-  - module.exports.getEnvInt = _int
-  - module.exports.devDefaults = _str
+  - module.exports.getEnv = \_env
+  - module.exports.getEnvString = \_str
+  - module.exports.getEnvBool = \_bool
+  - module.exports.getEnvInt = \_int
+  - module.exports.devDefaults = \_str
 
 - Update tests
 
@@ -221,7 +230,7 @@ När vi skapar nya settings-objektet
 
   kth-node-server@1.x:
 
-    server.setConfig(config) => server.setConfig({ full: config })
+  server.setConfig(config) => server.setConfig({ full: config })
 
   kth-node-server@3.x:
 
@@ -244,8 +253,7 @@ server.start({
 
 - change configuration.js (examples for node-web and node-api apps)
 
-
-*app.js*
+_app.js_
 Edit app.js to look like this:
 
 ```javascript
@@ -255,7 +263,7 @@ const server = require('./server/server')
 require('./server/init')
 ```
 
-*NODE-WEB:*
+_NODE-WEB:_
 
 ```javascript
 'use strict'
@@ -280,20 +288,18 @@ module.exports.browser = browserConfig
 
 In adldap.js you need to change:
 
-  - config.ldapClient => config.ldap
+- config.ldapClient => config.ldap
 
 And move any config settings from ldapClient object to ldap object.
 
-*NODE-API:*
+_NODE-API:_
 
 ```javascript
 'use strict'
 const { generateConfig } = require('kth-node-configuration')
 
 // These settings are used by the server
-const serverConfig = generateConfig([
-  require('../../../config/serverSettings')
-])
+const serverConfig = generateConfig([require('../../../config/serverSettings')])
 
 module.exports.server = serverConfig
 ```
@@ -351,7 +357,7 @@ require('./views/helpers')
 
 - Change config imports in js-files
 
-	var config = require('config') => var config = { config: window.config, paths: window.paths }
+      	var config = require('config') => var config = { config: window.config, paths: window.paths }
 
 - include config in head, should look like this
 
@@ -360,7 +366,8 @@ require('./views/helpers')
 {{prefixScript '/static/browserConfig' 'head-scripts'}}
 ```
 
-## TODO ##
+## TODO
+
 TODO - add test for decodeUri.js
 
 TODO - add test for utils.js
@@ -371,7 +378,8 @@ TODO - add test for generateConfig.js
 
 TODO - add test for getHandler.js
 
-## DONE ##
+## DONE
+
 DONE - add test for unpackNodeApiConfig.js
 
 DONE - add test for unpackMongodbConfig.js

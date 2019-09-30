@@ -1,5 +1,7 @@
 /* eslint-env mocha */
+
 'use strict'
+
 const expect = require('chai').expect
 const unpackKOPPSConfig = require('../lib/unpackKOPPSConfig')
 
@@ -7,8 +9,8 @@ const testURI = 'http://kopps-r.referens.sys.kth.se/api/kopps/v2/'
 const testURIWithSSL = 'https://kopps-r.referens.sys.kth.se/api/kopps/v2/'
 const failProtocol = 'mailto://'
 
-describe('unpackKOPPSConfig', function () {
-  it('can decode a KOPPS URI from fallback URI', function () {
+describe('unpackKOPPSConfig', () => {
+  it('can decode a KOPPS URI from fallback URI', () => {
     const obj = unpackKOPPSConfig('no-env-exists', testURI)
     expect(obj.https).to.equal(false)
     expect(obj.host).to.equal('kopps-r.referens.sys.kth.se')
@@ -16,8 +18,8 @@ describe('unpackKOPPSConfig', function () {
     expect(obj.basePath).to.equal('/api/kopps/v2/')
   })
 
-  it('can decode a KOPPS URI from env var', function () {
-    process.env['TEST_ENV_NOW_HERE'] = testURI
+  it('can decode a KOPPS URI from env var', () => {
+    process.env.TEST_ENV_NOW_HERE = testURI
     const obj = unpackKOPPSConfig('TEST_ENV_NOW_HERE')
     expect(obj.https).to.equal(false)
     expect(obj.host).to.equal('kopps-r.referens.sys.kth.se')
@@ -25,7 +27,7 @@ describe('unpackKOPPSConfig', function () {
     expect(obj.basePath).to.equal('/api/kopps/v2/')
   })
 
-  it('can decode a KOPPS URI from fallback URI and merge with options', function () {
+  it('can decode a KOPPS URI from fallback URI and merge with options', () => {
     const obj = unpackKOPPSConfig('no-env-exists', testURI, { extraOption: true })
     expect(obj.https).to.equal(false)
     expect(obj.host).to.equal('kopps-r.referens.sys.kth.se')
@@ -34,19 +36,19 @@ describe('unpackKOPPSConfig', function () {
     expect(obj.extraOption).to.equal(true)
   })
 
-  it('should not expose protocol property', function () {
+  it('should not expose protocol property', () => {
     const obj = unpackKOPPSConfig('no-env-exists', testURI)
     expect(obj.protocol).to.equal(undefined)
   })
 
-  it('should not expose port if https', function () {
+  it('should not expose port if https', () => {
     const obj = unpackKOPPSConfig('no-env-exists', testURIWithSSL)
     expect(obj.port).to.equal(undefined)
     expect(obj.https).to.equal(true)
   })
 
-  it('should not accept wrong protocol', function () {
-    var theErr
+  it('should not accept wrong protocol', () => {
+    let theErr
     try {
       unpackKOPPSConfig('no-env-exists', failProtocol)
     } catch (err) {

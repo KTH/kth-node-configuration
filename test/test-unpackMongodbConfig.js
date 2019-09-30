@@ -1,5 +1,7 @@
 /* eslint-env mocha */
+
 'use strict'
+
 const expect = require('chai').expect
 const unpackMongodbConfig = require('../lib/unpackMongodbConfig')
 
@@ -8,8 +10,8 @@ const testAzureURI = 'mongodb://username:password@url.documents.azure.com:10255/
 const failAzureURI = 'mongodb://username:password@url.documents.azure.com:10255?ssl=true'
 const failProtocol = 'http://mongohost:27017/innovation'
 
-describe('unpackMongodbConfig', function () {
-  it('can decode a Mongodb URI from fallback URI', function () {
+describe('unpackMongodbConfig', () => {
+  it('can decode a Mongodb URI from fallback URI', () => {
     const obj = unpackMongodbConfig('no-env-exists', testURI)
     expect(obj.username).to.equal('username@email.com')
     expect(obj.password).to.equal('password')
@@ -17,8 +19,8 @@ describe('unpackMongodbConfig', function () {
     expect(obj.ssl).to.equal(false)
   })
 
-  it('can decode a Mongodb URI from env var', function () {
-    process.env['TEST_ENV_NOW_HERE'] = testURI
+  it('can decode a Mongodb URI from env var', () => {
+    process.env.TEST_ENV_NOW_HERE = testURI
     const obj = unpackMongodbConfig('TEST_ENV_NOW_HERE')
     expect(obj.username).to.equal('username@email.com')
     expect(obj.password).to.equal('password')
@@ -26,7 +28,7 @@ describe('unpackMongodbConfig', function () {
     expect(obj.ssl).to.equal(false)
   })
 
-  it('can decode a Mongodb URI from fallback URI and merge with options', function () {
+  it('can decode a Mongodb URI from fallback URI and merge with options', () => {
     const obj = unpackMongodbConfig('no-env-exists', testURI, { extraOption: true })
     expect(obj.username).to.equal('username@email.com')
     expect(obj.password).to.equal('password')
@@ -35,7 +37,7 @@ describe('unpackMongodbConfig', function () {
     expect(obj.extraOption).to.equal(true)
   })
 
-  it('can decode a cosmos db connection string', function () {
+  it('can decode a cosmos db connection string', () => {
     const obj = unpackMongodbConfig('no-env-exists', testAzureURI)
     expect(obj.username).to.equal('username')
     expect(obj.password).to.equal('password')
@@ -45,7 +47,7 @@ describe('unpackMongodbConfig', function () {
     expect(obj.ssl).to.equal(true)
   })
 
-  it('can decode a url without dbname', function () {
+  it('can decode a url without dbname', () => {
     const obj = unpackMongodbConfig('no-env-exists', failAzureURI)
     expect(obj.username).to.equal('username')
     expect(obj.password).to.equal('password')
@@ -55,13 +57,13 @@ describe('unpackMongodbConfig', function () {
     expect(obj.ssl).to.equal(true)
   })
 
-  it('should not expose protocol property', function () {
+  it('should not expose protocol property', () => {
     const obj = unpackMongodbConfig('no-env-exists', testURI)
     expect(obj.protocol).to.equal(undefined)
   })
 
-  it('should not accept wrong protocol', function () {
-    var theErr
+  it('should not accept wrong protocol', () => {
+    let theErr
     try {
       unpackMongodbConfig('no-env-exists', failProtocol)
     } catch (err) {

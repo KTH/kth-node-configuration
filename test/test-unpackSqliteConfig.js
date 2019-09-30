@@ -1,5 +1,7 @@
 /* eslint-env mocha */
+
 'use strict'
+
 const expect = require('chai').expect
 const unpackSequelizeConfig = require('../lib/unpackSequelizeConfig')
 
@@ -8,27 +10,27 @@ const testURI = 'sqlite://' + testPathToFile
 const failProtocol = 'http://path/to/my/db/database.sqlite'
 const correctPathToFile = '/' + testPathToFile
 
-describe('unpackSqliteConfig', function () {
-  it('can decode a SQLite config from fallback URI', function () {
+describe('unpackSqliteConfig', () => {
+  it('can decode a SQLite config from fallback URI', () => {
     const obj = unpackSequelizeConfig('no-env-exists', undefined, testURI)
     expect(obj.dialect).to.equal('sqlite')
     expect(obj.storage).to.equal(correctPathToFile)
   })
 
-  it('can decode a Sequelize config from env var', function () {
-    process.env['TEST_ENV_NOW_HERE'] = testURI
+  it('can decode a Sequelize config from env var', () => {
+    process.env.TEST_ENV_NOW_HERE = testURI
     const obj = unpackSequelizeConfig('TEST_ENV_NOW_HERE')
     expect(obj.dialect).to.equal('sqlite')
     expect(obj.storage).to.equal(correctPathToFile)
   })
 
-  it('should not expose protocol property', function () {
+  it('should not expose protocol property', () => {
     const obj = unpackSequelizeConfig('no-env-exists', undefined, testURI)
     expect(obj.protocol).to.equal(undefined)
   })
 
-  it('should not accept wrong protocol', function () {
-    var theErr
+  it('should not accept wrong protocol', () => {
+    let theErr
     try {
       unpackSequelizeConfig('no-env-exists', undefined, failProtocol)
     } catch (err) {
