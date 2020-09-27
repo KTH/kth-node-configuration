@@ -2,6 +2,7 @@
   "name": "kth-node-configuration",
   "version": "2.0.1",
   "description": "Configuration module for Node.js projects",
+  "automaticPublish": "true",
   "main": "lib/index.js",
   "repository": {
     "type": "git",
