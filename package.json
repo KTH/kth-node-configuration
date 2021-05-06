@@ -12,6 +12,12 @@
     "url": "https://github.com/KTH/kth-node-configuration/issues"
   },
   "homepage": "https://github.com/KTH/kth-node-configuration#readme",
+  "scripts": {
+    "test": "node_modules/mocha/bin/mocha test/**/test-*.js --exit",
+    "codefix": "pretty-quick",
+    "build": "./build.sh",
+    "prepare": "bash -c 'if [ -f ./node_modules/.bin/husky ]; then husky install; fi'"
+  },
   "dependencies": {
     "deep-assign": "^3.0.0",
     "qs": "^6.10.1",
@@ -30,16 +36,11 @@
   "devDependencies": {
     "@kth/eslint-config-kth": "^1.0.10",
     "chai": "^4.3.4",
-    "dotenv": "8.2.0",
-    "eslint": "^7.24.0",
+    "dotenv": "9.0.0",
+    "eslint": "^7.25.0",
     "husky": "^6.0.0",
     "mocha": "^8.3.2",
     "prettier": "^2.2.1",
     "pretty-quick": "^3.1.0"
-  },
-  "scripts": {
-    "test": "node_modules/mocha/bin/mocha test/**/test-*.js --exit",
-    "codefix": "pretty-quick",
-    "build": "./build.sh"
   }
 }
