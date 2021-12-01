@@ -19,7 +19,6 @@
     "prepare": "bash -c 'if [ -f ./node_modules/.bin/husky ]; then husky install; fi'"
   },
   "dependencies": {
-    "deep-assign": "^3.0.0",
     "qs": "^6.10.1",
     "safe-utils": "^0.2.1",
     "urlgrey": "^0.4.4"
