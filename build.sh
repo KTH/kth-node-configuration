@@ -1,5 +1,7 @@
+#!/bin/bash
+
 npm install
 
 npm test
 
-rm -rf node_modules
+#rm -rf node_modules

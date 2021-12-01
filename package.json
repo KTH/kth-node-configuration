@@ -13,7 +13,7 @@
   },
   "homepage": "https://github.com/KTH/kth-node-configuration#readme",
   "scripts": {
-    "test": "bash -c node_modules/mocha/bin/mocha test/**/test-*.js --exit",
+    "test": "/bin/bash -c node_modules/mocha/bin/mocha test/**/test-*.js --exit",
     "codefix": "pretty-quick",
     "build": "./build.sh",
     "prepare": "bash -c 'if [ -f ./node_modules/.bin/husky ]; then husky install; fi'"
