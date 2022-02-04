@@ -2,10 +2,11 @@
 
 'use strict'
 
-const expect = require('chai').expect
 const generateConfig = require('../lib/generateConfig')
 
 describe('generateConfig', () => {
+  process.env.NODE_ENV = 'dev'
+
   it('can merge three config objects', () => {
     const conf1 = {
       a: 4,
@@ -31,7 +32,7 @@ describe('generateConfig', () => {
       }
     }
     const obj = generateConfig([conf1, conf2, conf3])
-    expect(obj).to.deep.equal({
+    expect(obj).toEqual({
       a: 68,
       b: {
         c: 44,
