@@ -19,7 +19,7 @@
     "prepare": "bash -c 'if [ -f ./node_modules/.bin/husky ]; then husky install; fi'"
   },
   "dependencies": {
-    "qs": "^6.10.1",
+    "qs": "^6.11.0",
     "urlgrey": "^0.4.4"
   },
   "author": {
@@ -32,12 +32,12 @@
     "configuration"
   ],
   "devDependencies": {
-    "@kth/eslint-config-kth": "^3.0.6",
+    "@kth/eslint-config-kth": "^3.0.10",
     "dotenv": "10.0.0",
-    "eslint": "^8.12.0",
-    "husky": "^7.0.2",
-    "jest": "^27.4.7",
-    "prettier": "^2.4.1",
-    "pretty-quick": "^3.1.1"
+    "eslint": "^8.20.0",
+    "husky": "^7.0.4",
+    "jest": "^27.5.1",
+    "prettier": "^2.7.1",
+    "pretty-quick": "^3.1.3"
   }
 }
