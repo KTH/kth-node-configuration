@@ -1,9 +1,11 @@
 {
   "name": "kth-node-configuration",
-  "version": "2.0.1",
+  "version": "2.0.13",
   "description": "Configuration module for Node.js projects",
-  "automaticPublish": "true",
   "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/KTH/kth-node-configuration"
