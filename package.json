@@ -18,7 +18,7 @@
     "test": "jest",
     "codefix": "pretty-quick",
     "build": "./build.sh",
-    "prepare": "bash -c 'if [ -f ./node_modules/.bin/husky ]; then husky install; fi'"
+    "prepare": "husky"
   },
   "dependencies": {
     "qs": "^6.15.0",
@@ -37,7 +37,7 @@
     "@kth/eslint-config-kth": "^3.7.0",
     "dotenv": "16.6.1",
     "eslint": "^8.57.1",
-    "husky": "^8.0.3",
+    "husky": "^9.1.7",
     "jest": "^30.2.0",
     "prettier": "^3.8.1",
     "pretty-quick": "^4.2.2"
