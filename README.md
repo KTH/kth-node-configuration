@@ -1,4 +1,4 @@
-# kth-node-configuration [![Build Status](https://travis-ci.org/KTH/kth-node-configuration.svg?branch=master)](https://travis-ci.org/KTH/kth-node-configuration)
+# kth-node-configuration
 
 Configuration module for Node.js projects.
 
@@ -183,7 +183,6 @@ if (nodeEnv === 'development' || nodeEnv === 'dev' || !nodeEnv) {
 ## DEV NOTES
 
 - vi fimpar local-/prod-/ref-/devSettings.js
-
   - läggs i commonSettings.js, serverSettings.js, browserSettings.js
 
 - fimpa full, safe och secure
@@ -198,7 +197,6 @@ När vi skapar nya settings-objektet
 ## Migrating from <= 1.0.1
 
 - convert ...Settings.js files to:
-
   - commonSettings.js -- shared by browser and server
   - serverSettings.js -- server specific settings that should NEVER be sent to a browser
   - browserSettings.js -- browser specific settings that are passed to browser
@@ -215,7 +213,6 @@ När vi skapar nya settings-objektet
 - server.full => server
 
 - What are these used for (kth-node-configuration)
-
   - module.exports.getEnv = \_env
   - module.exports.getEnvString = \_str
   - module.exports.getEnvBool = \_bool
@@ -247,7 +244,6 @@ server.start({
 ```
 
 - change in adldap.js (only if we use ldap)
-
   - attributes: config.ldapClient.userattrs => attributes: config.ldap.userattrs
   - config.ldapClient.filterReplaceHolder, kthid => config.ldap.filterReplaceHolder, kthid
 
