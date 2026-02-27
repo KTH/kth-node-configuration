@@ -1,7 +1,3 @@
-/* eslint-env mocha */
-
-'use strict'
-
 const unpackKOPPSConfig = require('../lib/unpackKOPPSConfig')
 
 const testURI = 'http://kopps-r.referens.sys.kth.se/api/kopps/v2/'

@@ -1,7 +1,3 @@
-/* eslint-env mocha */
-
-'use strict'
-
 const unpackNodeApiConfig = require('../lib/unpackNodeApiConfig')
 
 const testURI = 'http://node-api:3001/api/node'

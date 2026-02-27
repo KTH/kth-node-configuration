@@ -1,7 +1,3 @@
-/* eslint-env mocha */
-
-'use strict'
-
 const unpackMongodbConfig = require('../lib/unpackMongodbConfig')
 
 const testURI = 'mongodb://username@email.com:password@mongohost:27017/innovation?ssl=false'

@@ -1,8 +1,3 @@
-/* eslint-disable no-unused-expressions */
-/* eslint-env mocha */
-
-'use strict'
-
 const unpackSequelizeConfig = require('../lib/unpackSequelizeConfig')
 
 const testURI = 'sqlite://path/to/my/db/database.sqlite'

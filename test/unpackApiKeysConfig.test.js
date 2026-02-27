@@ -1,7 +1,3 @@
-/* eslint-env mocha */
-
-'use strict'
-
 const unpackApiKeysConfig = require('../lib/unpackApiKeysConfig')
 
 const uriOne = '?name=devClient&apiKey=1234&scope=write&scope=read'

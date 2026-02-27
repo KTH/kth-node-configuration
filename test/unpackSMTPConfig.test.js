@@ -1,7 +1,3 @@
-/* eslint-env mocha */
-
-'use strict'
-
 const unpackSMTPConfig = require('../lib/unpackSMTPConfig')
 
 const testURI = 'smtp://smtp.kth.se:25'

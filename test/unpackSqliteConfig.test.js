@@ -1,7 +1,3 @@
-/* eslint-env mocha */
-
-'use strict'
-
 const unpackSequelizeConfig = require('../lib/unpackSequelizeConfig')
 
 const testPathToFile = 'path/to/my/db/database.sqlite'

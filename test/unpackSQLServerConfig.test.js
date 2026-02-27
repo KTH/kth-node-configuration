@@ -1,7 +1,3 @@
-/* eslint-env mocha */
-
-'use strict'
-
 const unpackSequelizeConfig = require('../lib/unpackSequelizeConfig')
 
 const testInstanceURI = 'mssql://username:password@db.test.com/InstanceName/DbName'

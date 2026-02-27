@@ -1,7 +1,3 @@
-/* eslint-env mocha */
-
-'use strict'
-
 const unpackRedisConfig = require('../lib/unpackRedisConfig')
 
 const testURI = 'redis://localhost:6379/'
