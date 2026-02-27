@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "qs": "^6.15.0",
-    "urlgrey": "^0.4.4"
+    "urlgrey": "^2.1.0"
   },
   "author": {
     "name": "KTH",
