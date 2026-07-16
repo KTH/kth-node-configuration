@@ -4,11 +4,15 @@
   "description": "Configuration module for Node.js projects",
   "main": "lib/index.js",
   "files": [
-    "lib"
+    "lib",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "MIGRATING.md"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/KTH/kth-node-configuration"
+    "url": "git+https://github.com/KTH/kth-node-configuration.git"
   },
   "bugs": {
     "url": "https://github.com/KTH/kth-node-configuration/issues"
