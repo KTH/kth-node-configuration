@@ -4,24 +4,29 @@
   "description": "Configuration module for Node.js projects",
   "main": "lib/index.js",
   "files": [
-    "lib"
+    "lib",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "MIGRATING.md"
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/KTH/kth-node-configuration"
+    "url": "git+https://github.com/KTH/kth-node-configuration.git"
   },
   "bugs": {
     "url": "https://github.com/KTH/kth-node-configuration/issues"
   },
   "homepage": "https://github.com/KTH/kth-node-configuration#readme",
   "scripts": {
+    "lint": "eslint --quiet",
+    "lint-v": "eslint",
     "test": "jest",
-    "codefix": "pretty-quick",
     "build": "./build.sh",
     "prepare": "husky"
   },
   "dependencies": {
-    "qs": "^6.15.0",
+    "qs": "^6.15.3",
     "urlgrey": "^0.4.4"
   },
   "author": {
@@ -33,13 +38,16 @@
     "node",
     "configuration"
   ],
+  "license": "MIT",
+  "engines": {
+    "node": ">=24"
+  },
   "devDependencies": {
-    "@kth/eslint-config-kth": "^3.7.0",
-    "dotenv": "^17.3.1",
-    "eslint": "^8.57.1",
+    "@kth/eslint-config-kth": "^4.1.0",
+    "eslint": "^9.39.5",
     "husky": "^9.1.7",
-    "jest": "^30.2.0",
-    "prettier": "^3.8.1",
-    "pretty-quick": "^4.2.2"
+    "jest": "^30.4.2",
+    "lint-staged": "^17.0.8",
+    "prettier": "^3.9.5"
   }
 }
