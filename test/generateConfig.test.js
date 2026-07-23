@@ -10,4 +10,18 @@ describe('generateConfig', () => {
     const obj = generateConfig([conf1, conf2, conf3])
     expect(obj).toEqual({ a: 68, b: { c: 44, d: '45', e: { f: '112', g: 357 } }, env: 'dev' })
   })
+
+  it('concatenates two arrays', () => {
+    const conf1 = { plugins: ['a', 'b'] }
+    const conf2 = { plugins: ['c'] }
+    const obj = generateConfig([conf1, conf2])
+    expect(obj.plugins).toEqual(['a', 'b', 'c'])
+  })
+
+  it('overwrites an array when the later config value is not an array', () => {
+    const conf1 = { plugins: ['a', 'b'] }
+    const conf2 = { plugins: 'override-value' }
+    const obj = generateConfig([conf1, conf2])
+    expect(obj.plugins).toEqual('override-value')
+  })
 })
