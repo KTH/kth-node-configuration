@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## 3.0.0
+
+**BREAKING**
+
+- Removed function decodeUri.
+- Bug fix when `generateConfig` could merge array with plain variable. Now both sources needs to be array's.
+
 ## 2.2.0
 
 ### Changed
