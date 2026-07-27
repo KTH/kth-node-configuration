@@ -4,6 +4,8 @@ const testURI = 'mongodb://username@email.com:password@mongohost:27017/innovatio
 const testAzureURI = 'mongodb://username:password@url.documents.azure.com:10255/project?ssl=true'
 const failAzureURI = 'mongodb://username:password@url.documents.azure.com:10255?ssl=true'
 const failProtocol = 'http://mongohost:27017/innovation'
+const testURIWithoutPassword = 'mongodb://someuser@mongohost:27017/somedb'
+const testURIWithoutAuth = 'mongodb://mongohost:27017/somedb'
 
 describe('unpackMongodbConfig', () => {
   it('can decode a Mongodb URI from fallback URI', () => {
@@ -50,6 +52,22 @@ describe('unpackMongodbConfig', () => {
     expect(obj.db).toEqual(null)
     expect(obj.uri).toEqual(failAzureURI)
     expect(obj.ssl).toEqual(true)
+  })
+
+  it('can decode a valid URI with a username but no password', () => {
+    const obj = unpackMongodbConfig('no-env-exists', testURIWithoutPassword)
+    expect(obj.username).toEqual('someuser')
+    expect(obj.password).toEqual(undefined)
+    expect(obj.host).toEqual('mongohost:27017')
+    expect(obj.db).toEqual('somedb')
+  })
+
+  it('can decode a valid URI with no auth at all', () => {
+    const obj = unpackMongodbConfig('no-env-exists', testURIWithoutAuth)
+    expect(obj.username).toEqual('')
+    expect(obj.password).toEqual('')
+    expect(obj.host).toEqual('mongohost:27017')
+    expect(obj.db).toEqual('somedb')
   })
 
   it('should not expose protocol property', () => {
