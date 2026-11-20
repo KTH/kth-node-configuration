@@ -26,7 +26,7 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "qs": "^6.15.3"
+    "qs": "^6.17.1"
   },
   "author": {
     "name": "KTH",
@@ -42,11 +42,11 @@
     "node": ">=24"
   },
   "devDependencies": {
-    "@kth/eslint-config-kth": "^4.1.0",
+    "@kth/eslint-config-kth": "^4.1.1",
     "eslint": "^9.39.5",
     "husky": "^9.1.7",
-    "jest": "^30.4.2",
-    "lint-staged": "^17.2.0",
-    "prettier": "^3.9.6"
+    "jest": "^30.5.2",
+    "lint-staged": "^17.6.1",
+    "prettier": "^3.10.1"
   }
 }
